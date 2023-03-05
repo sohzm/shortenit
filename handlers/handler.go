@@ -17,6 +17,8 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
+// NewHandler handles the requests for new short links that the frontend makes
+// it returns a NewLinkResponse if the request is correct.
 func NewHandler(w http.ResponseWriter, r *http.Request) {
 
 	inputBody := structs.NewLinkRequest{}
@@ -84,6 +86,8 @@ func NewHandler(w http.ResponseWriter, r *http.Request) {
 	// add to db
 	newAlias := helper.GenerateRandomString()
 
+	// yes this is resilient to sql injection :) 
+	// read here: https://go.dev/doc/database/sql-injection
 	_, err = structs.DB.Exec("INSERT INTO links VALUES (?, ?, now())", newAlias, newLink)
 	if err != nil {
 		log.Fatal(err)

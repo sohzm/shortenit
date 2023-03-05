@@ -29,13 +29,17 @@ func initConfigurationStruct() {
 }
 
 func main() {
+	// initialize
 	initConfigurationStruct()
 	databaseHelper.InitDB()
+
+	// sync
 	helper.SyncAliases()
 	go helper.SyncAliasesWithTimer()
 
+	// add handlers
 	http.HandleFunc("/new", handlers.NewHandler)
 	http.HandleFunc("/", handlers.RedirectHandler)
-	log.Println("READY")
+	log.Println("Server Ready at Port:", structs.Config.AppPort)
 	log.Fatal(http.ListenAndServe(structs.Config.AppPort, nil))
 }

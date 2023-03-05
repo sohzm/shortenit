@@ -9,6 +9,8 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
+// InitDB will initialize database if not already present and create a links 
+// table if not already present.
 func InitDB() {
 
 	var err error

@@ -8,6 +8,8 @@ import (
 	"time"
 )
 
+// GenerateRandomString will generate random string of length 3 which isnt 
+// already present in the structs.LinkSet
 func GenerateRandomString() string {
 	rand.Seed(time.Now().UTC().UnixNano())
 	chars := "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789"
@@ -29,15 +31,24 @@ func GenerateRandomString() string {
 	return ""
 }
 
+// SyncAliasesWithTimer will call SyncAliases() every 24 hour, maintaining a 
+// local store allows us to provide a new link pretty quickly without doing a DB 
+// call struct.LinkSet will have the links we had when last sync was done + at 
+// max 20_000 more links, which makes it have the maximum size of 40_000. We 
+// have ample of variations of chars so having a local store double the size of
+// actual db wont cause any problems but will result in a speed boost.
 func SyncAliasesWithTimer() {
 	for range time.Tick(time.Hour * 24) {
 		SyncAliases()
 	}
 }
 
+// SyncAliases ... syncs the aliases.
+// The reason Mutex is used is that we dont want to add values to the LinkSet
+// when we're syncing with the db.
 func SyncAliases() {
 
-	log.Println("Syncing DB")
+	log.Println("Syncing DB.")
 
 	structs.Mutex.Lock()
 	defer structs.Mutex.Unlock()
@@ -58,5 +69,5 @@ func SyncAliases() {
 		log.Fatal(err)
 	}
 
-	log.Println("Sync end")
+	log.Println("Syncing Ended Successfully.")
 }
