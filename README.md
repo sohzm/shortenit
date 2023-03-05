@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/sz47/shortenit/blob/main/assets/screenshot.png" align="center" alt="no I dont use chromium, its a testing browser."> 
+  <img src="https://github.com/sz47/shortenit/blob/master/assets/screenshot.png" align="center" alt="no I dont use chromium, its a testing browser."> 
 </p>
 
 # ShortenIt
