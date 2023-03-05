@@ -1,0 +1,35 @@
+version: "3.8"
+services:
+  # Start MySQL.
+  mysql:
+    image: mysql
+    volumes:
+      -  /home/soham/tempdb:/var/lib/mysql
+    ports: 
+     - 3306:3306   
+    environment:
+      MYSQL_DATABASE: testdb
+      MYSQL_ROOT_PASSWORD: password
+
+  # Wait for MySQL to be joinable.
+  #  check-db-started: 
+  #    image: jwilder/dockerize:0.6.1
+  #    depends_on:
+  #      - mysql
+  #    command: 'dockerize -wait=tcp://mysql:3306'
+  
+  # Only start myapp once MySQL is joinable.
+  shortenit:
+    image: shortenit
+    restart: always
+    build: .
+    ports:
+      - 9999:9999
+        #    depends_on:
+        #      - check-db-started
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s

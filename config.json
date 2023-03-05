@@ -1,0 +1,14 @@
+{
+    "db": {
+        "userName":       "root",
+        "password":       "password",
+        "dbName":         "testdb",
+        "tableName":      "links",
+        "dbURL":          "mysql",
+        "dbPort":         "3306",
+        "eventName":      "deleteRecords",
+        "maxAllowedTime": "24 HOUR"
+    },
+    "appPort":  ":9999",
+    "urlLimit": 20000
+}
