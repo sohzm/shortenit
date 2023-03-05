@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://github.com/sz47/shortenit/blob/main/assets/screenshot.png" align="center" alt="no I dont use chromium, its a testing browser."> 
+</p>
+
 # ShortenIt
 
 URL Shortener using MySQL as DB.
