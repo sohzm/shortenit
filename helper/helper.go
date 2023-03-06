@@ -53,6 +53,9 @@ func SyncAliases() {
 	structs.Mutex.Lock()
 	defer structs.Mutex.Unlock()
 
+	// empty set
+	structs.LinkSet = make(map[string]bool)
+
 	rows, err := structs.DB.Query(fmt.Sprintf("SELECT key_url FROM %s;", structs.Config.DB.TableName))
 	if err != nil {
 		log.Fatal(err)
@@ -63,6 +66,7 @@ func SyncAliases() {
 		if err := rows.Scan(&key); err != nil {
 			log.Fatal(err)
 		}
+		structs.LinkSet[key] = true
 	}
 
 	if err := rows.Err(); err != nil {
