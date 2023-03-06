@@ -21,6 +21,8 @@ docker-compose up
 ```
 Now just open [localhost:9999](http://localhost:9999).             // btw you can configure everything like the port from the config file :)
 
+Also the mysql database data will persist on the local system, even if the docker images crash or gets stopped. The data will be located in the `mysql` folder in cwd.
+
 </br>
 
 ### Working
