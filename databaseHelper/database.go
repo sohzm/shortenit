@@ -48,7 +48,7 @@ func InitDB() {
 
 	_, err = structs.DB.Exec(
 		fmt.Sprintf(
-			"CREATE TABLE IF NOT EXISTS %s.%s"+
+			"CREATE TABLE IF NOT EXISTS %s.%s "+
 				"(key_url varchar(3), value_url text, last_update DATETIME, UNIQUE(key_url));",
 			structs.Config.DB.DBName, structs.Config.DB.TableName,
 		),
@@ -64,7 +64,7 @@ func InitDB() {
 
 	_, err = structs.DB.Exec(
 		fmt.Sprintf(
-			"CREATE EVENT IF NOT EXISTS %s ON SCHEDULE EVERY 1 MINUTE DO"+
+			"CREATE EVENT IF NOT EXISTS %s ON SCHEDULE EVERY 1 MINUTE DO "+
 				"DELETE FROM %s WHERE DATE_ADD(last_update,INTERVAL %s) < NOW();",
 			structs.Config.DB.EventName, structs.Config.DB.TableName,
 			structs.Config.DB.MaxAllowedTime,
