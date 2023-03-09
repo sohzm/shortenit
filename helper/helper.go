@@ -12,6 +12,9 @@ import (
 // already present in the structs.LinkSet
 func GenerateRandomString() string {
 	rand.Seed(time.Now().UTC().UnixNano())
+
+	// notice we didn't include l, I, 0, O in the chars as these often cause 
+	// confusion due to the fact that they look kind of same under most fonts.
 	chars := "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789"
 	for true {
 		temp := fmt.Sprintf("%c%c%c", chars[rand.Intn(57)], chars[rand.Intn(57)], chars[rand.Intn(57)])
